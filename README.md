@@ -1,8 +1,8 @@
 ![Static Badge](https://img.shields.io/badge/Developed%20on-GNU%20Linux-red)
 ![Static Badge](https://img.shields.io/badge/Python-v3.x-bright)
 ![Static Badge](https://img.shields.io/badge/License-GPLv3-yellow)
-![Static Badge](https://img.shields.io/badge/Topics-21-red)
-![Static Badge](https://img.shields.io/badge/Labs-178-blue)
+![Static Badge](https://img.shields.io/badge/Topics-22-red)
+![Static Badge](https://img.shields.io/badge/Labs-179-blue)
 
 ![WebScurity Academy](./web-security-python.png)
 
